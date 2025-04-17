@@ -1,40 +1,82 @@
-# Credit-Card-Fraud-Detection
----
-#### Overview
+# 🧠 Machine Learning Model Evaluation Toolkit
 
- This repository contains the code for a Credit Card Fraud Detection project using a dataset from Kaggle, which includes  284,807 credit card transactions with only 492 frauds, is highly unbalanced. To address the class imbalance, the project implements a voting classifier and a neural network with focal loss in PyTorch, achieving an F1-score of 0.86 and 0.85 PR_AUC for the positive class (fraud).     
+This project provides a **comprehensive evaluation pipeline** for binary classification models. It offers precision-recall, ROC curves, optimal threshold detection, confusion matrix heatmaps, and more — making it easier to understand how your model performs beyond accuracy.
 
+## 📂 Project Structure
 
- ----
+```
+.
+├── prepare_data.py               # Preprocessing and data loading
+├── data_saver.py                 # Utility to save evaluation images
+├── eval.py                       # All evaluation functions
+├── models/                       # (Optional) Folder to store trained models
+├── results/                      # Saved visual outputs from evaluations
+└── README.md                     # You're reading it!
+```
 
-------
-#### Focal-loss 
+## 🚀 Features
 
-Focal Loss is a specialized loss function designed to address the class imbalance problem commonly encountered in tasks like object detection. It was introduced in the paper "Focal Loss for Dense Object Detection." The main idea is to focus more on hard-to-classify examples while reducing the loss contribution from easy-to-classify examples. This is achieved through two parameter 𝛼 (alpha) and 𝛾 (gamma).
+- Evaluate model with:
+  - Default threshold (0.5)
+  - **Optimal threshold** based on F1-score
+- Confusion matrix + classification report
+- **Precision-Recall Curve** with AUC
+- **ROC Curve** with AUC
+- Precision/Recall vs. Threshold visualization
+- Easily pluggable with any `sklearn`-style model
 
-![focal-loss](docs/focal_loss.png)
+## 🛠️ Setup
 
-#### Focal-loss results 
+Install dependencies:
 
-* I tried Server combination of Alpha (0.80-0.99, +0.5) and gamma (0-4, +1).
+```bash
+pip install numpy pandas matplotlib seaborn scikit-learn
+```
 
-* The best result archieve by Alpha 0.75 and gamma 2.
+## 📊 How to Use
 
-![best_alpha_gamma](docs/best_focal_loss.png)
+1. **Train a Model**
+```python
+from sklearn.linear_model import LogisticRegression
+model = LogisticRegression()
+model.fit(X_train, y_train)
+```
 
-* Notes:
-  * Alpth and gamma sometimes unstables train using batchnorm make this effect less occur and switching from Adam to SGD also. 
-  * High gamma (5~7) gives very noisey loss curve.
+2. **Evaluate on Validation or Test Set**
+```python
+from eval import eval_valdtion
 
-####  Training and the validation curves
-![loss](docs/image.png)
-![AUC-f1-score](docs/image-2.png)
+metrics, pr_auc, roc_auc = eval_valdtion(
+    model_b=model,
+    x_val=X_val,
+    y_val=y_val,
+    models_dict_compare={},
+    model_name="LogReg",
+    dataset_title=" Validation"
+)
+```
 
-#### Smote and undersampling technique 
+> Images will be automatically saved using `save_img()` from `data_saver.py`
 
-* SMOTE (Synthetic Minority Over-sampling Technique) is an oversampling method used to generate synthetic samples for the minority class. Despite experimenting with SMOTE, random over-sampling, and under-sampling techniques, the results on the validation data were poor.
+## 🖼️ Example Outputs
 
-* Smote (0.05-ratio) results:
- ![somte_0.05](docs/Smote_0.05.png)
-* RandomUnderSampler (0.05-ratio) results:
- ![under_0.05](docs/Under_0.05.png)
+- **Confusion Matrix**
+
+![Confusion Matrix Example](results/confusion_matrix_example.png)
+
+- **Precision-Recall Curve**
+
+![PR Curve Example](results/pr_curve_example.png)
+
+- **ROC Curve**
+
+![ROC Curve Example](results/roc_curve_example.png)
+
+## 📌 Notes
+
+- Be sure to fix the typo from `thershold` → `threshold` for consistency.
+- Visualizations are saved with titles that include model and dataset names.
+
+## 📜 License
+
+MIT License — free to use and modify.
