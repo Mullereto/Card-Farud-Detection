@@ -72,11 +72,3 @@ metrics, pr_auc, roc_auc = eval_valdtion(
 
 ![ROC Curve Example](eval_models_img_results/Receiver_Operating_Characteristic_(ROC)_Curve_for_LogisticRegression_validation.png)
 
-## 📌 Notes
-
-- Be sure to fix the typo from `thershold` → `threshold` for consistency.
-- Visualizations are saved with titles that include model and dataset names.
-
-## 📜 License
-
-MIT License — free to use and modify.
