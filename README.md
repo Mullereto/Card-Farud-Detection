@@ -62,15 +62,15 @@ metrics, pr_auc, roc_auc = eval_valdtion(
 
 - **Confusion Matrix**
 
-![Confusion Matrix Example](eval_models_img_results/Confusion Matrix for LogisticRegression Train.png)
+![Confusion Matrix Example](eval_models_img_results/Confusion_Matrix_for_LogisticRegression_Train.png)
 
 - **Precision-Recall Curve**
 
-![PR Curve Example](eval_models_img_results/Precision and Recall for different Thresholds for LogisticRegression validation.png)
+![PR Curve Example](eval_models_img_results/Precision_and_Recall_for_different_Thresholds_for_LogisticRegression_validation.png)
 
 - **ROC Curve**
 
-![ROC Curve Example](eval_models_img_results/Receiver Operating Characteristic (ROC) Curve for LogisticRegression validation.png)
+![ROC Curve Example](eval_models_img_results/Receiver_Operating_Characteristic_(ROC)_Curve_for_LogisticRegression_validation.png)
 
 ## 📌 Notes
 
